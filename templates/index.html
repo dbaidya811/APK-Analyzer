@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APK Safety Analyzer</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>APK Safety Analyzer</h1>
+      <p>Upload an APK to run basic static checks and get a risk score.</p>
+    </header>
+
+    <section id="intro" class="hero">
+      <div class="hero-content">
+        <h2>Enterprise-grade APK insight</h2>
+        <p class="muted">Fast, privacy-first, on-device static analysis tailored for teams.</p>
+        <div class="hero-points">
+          <div class="point">
+            <strong>Actionable risk</strong>
+            <span>Clear scoring with reasons you can share.</span>
+          </div>
+          <div class="point">
+            <strong>Permission visibility</strong>
+            <span>Spot dangerous capabilities instantly.</span>
+          </div>
+          <div class="point">
+            <strong>Developer friendly</strong>
+            <span>Simple UI, detailed JSON for audits.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="uploader">
+      <form id="uploadForm">
+        <div id="dropzone" class="dropzone">
+          <input type="file" id="fileInput" name="file" accept=".apk" />
+          <p>Drag & drop APK here or click to select</p>
+        </div>
+        <button type="submit" class="btn">Analyze</button>
+      </form>
+      <div id="status" class="status"></div>
+    </section>
+
+    <section id="results" class="results hidden">
+      <h2>Results</h2>
+      <div class="recommendation">
+        <div class="rec-header">Final Recommendation</div>
+        <div class="rec-line">
+          <span class="badge" id="recBadge" data-field="recommendation">-</span>
+        </div>
+        <div class="rec-reason" data-field="recommendation_reason">-</div>
+      </div>
+      <div class="summary">
+        <div><strong>File:</strong> <span data-field="filename">-</span></div>
+        <div><strong>App:</strong> <span data-field="app_name">-</span></div>
+        <div><strong>Package:</strong> <span data-field="package_name">-</span></div>
+        <div><strong>Version:</strong> <span data-field="version_name">-</span> (<span data-field="version_code">-</span>)</div>
+        <div><strong>Debuggable:</strong> <span data-field="debuggable">-</span></div>
+        <div class="badge" data-field="risk_label">-</div>
+        <div><strong>Risk Score:</strong> <span data-field="risk_score">-</span>/10</div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Risk Score</h3>
+          <canvas id="chart_risk" height="140"></canvas>
+        </div>
+        <div class="card">
+          <h3>Permissions Breakdown</h3>
+          <canvas id="chart_permissions" height="160"></canvas>
+        </div>
+        <div class="card">
+          <h3>App Components</h3>
+          <canvas id="chart_components" height="160"></canvas>
+        </div>
+        <div class="card">
+          <h3>Dangerous Permissions</h3>
+          <ul data-list="dangerous_permissions"></ul>
+        </div>
+        <div class="card">
+          <h3>All Permissions</h3>
+          <ul data-list="permissions"></ul>
+        </div>
+        <div class="card">
+          <h3>URLs</h3>
+          <ul data-list="urls"></ul>
+        </div>
+        <div class="card">
+          <h3>Activities</h3>
+          <ul data-list="activities"></ul>
+        </div>
+        <div class="card">
+          <h3>Services</h3>
+          <ul data-list="services"></ul>
+        </div>
+        <div class="card">
+          <h3>Receivers</h3>
+          <ul data-list="receivers"></ul>
+        </div>
+        <div class="card">
+          <h3>Certificates</h3>
+          <ul data-list="certificates"></ul>
+        </div>
+        <div class="card">
+          <h3>Reasons</h3>
+          <ul data-list="risk_reasons"></ul>
+        </div>
+      </div>
+
+      <details>
+        <summary>Raw JSON</summary>
+        <pre id="rawJson"></pre>
+      </details>
+    </section>
+
+    <footer>
+      <small>Note: This is a basic static analysis. Always use comprehensive security reviews for critical apps.</small>
+    </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+Flask>=2.3,<3.0
+Werkzeug>=2.3,<3.0
+itsdangerous>=2.1
+Jinja2>=3.1
+click>=8.1
+
+androguard
+lxml>=4.9
+pycryptodome>=3.19
+requests>=2.31
+gunicorn>=21.2
